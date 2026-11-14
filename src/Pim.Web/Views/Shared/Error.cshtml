@@ -1,0 +1,19 @@
+@model ErrorViewModel
+@{
+    ViewData["Title"] = "Erro";
+}
+
+<div class="row justify-content-center mt-md-5">
+    <div class="col-md-8 col-lg-6">
+        <div class="alert alert-danger shadow-sm" role="alert">
+            <h1 class="h4 alert-heading">Ocorreu um erro</h1>
+            <p class="mb-0">Não foi possível concluir a operação. Tente novamente ou avise o suporte.</p>
+            @if (Model.ShowRequestId)
+            {
+                <hr />
+                <p class="small mb-0"><strong>Código da requisição:</strong> <code>@Model.RequestId</code></p>
+            }
+        </div>
+        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">Voltar ao início</a>
+    </div>
+</div>

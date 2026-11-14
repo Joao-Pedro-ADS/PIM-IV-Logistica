@@ -1,0 +1,85 @@
+@host = http://localhost:5090
+
+# 1) Faça o login e copie o "token" da resposta para a variável do perfil
+@conferente = cole-o-token-aqui
+@operador = cole-o-token-aqui
+@porteiro = cole-o-token-aqui
+@motorista = cole-o-token-aqui
+
+### Login (perfis do app: conferente, operador, porteiro, motorista — senha 123456)
+POST {{host}}/auth/login
+Content-Type: application/json
+
+{ "login": "conferente", "senha": "123456" }
+
+### RF05 — chegada do veículo do fornecedor
+POST {{host}}/portaria/chegada-fornecedor
+Authorization: Bearer {{porteiro}}
+Content-Type: application/json
+
+{ "placa": "XYZ1A23" }
+
+### RF06 — começar a entrada bipando a chave da nota 9010
+POST {{host}}/recebimentos
+Authorization: Bearer {{conferente}}
+Content-Type: application/json
+
+{ "chaveNota": "35261111222333000181550010000090101000090100" }
+
+### RF06 — bipar uma caixa do Produto B (repita 5 vezes)
+POST {{host}}/recebimentos/3/caixas
+Authorization: Bearer {{conferente}}
+Content-Type: application/json
+
+{ "codigoProduto": "7891000200206" }
+
+### RF07 — conferência
+GET {{host}}/recebimentos/3
+Authorization: Bearer {{conferente}}
+
+### RF07 — finalizar
+POST {{host}}/recebimentos/3/finalizar
+Authorization: Bearer {{conferente}}
+
+### RF11 — (crie antes um carregamento no Web) ler o QR do veículo
+GET {{host}}/carregamentos/veiculo?qr=VEICULO:2
+Authorization: Bearer {{operador}}
+
+### RF11 — bipar uma caixa no carregamento 1
+POST {{host}}/carregamentos/1/caixas
+Authorization: Bearer {{operador}}
+Content-Type: application/json
+
+{ "codigoCaixa": "CX00000001" }
+
+### RF12 — saída
+POST {{host}}/portaria/saida
+Authorization: Bearer {{porteiro}}
+Content-Type: application/json
+
+{ "qr": "VEICULO:2" }
+
+### RF13 — entregas do motorista
+GET {{host}}/entregas
+Authorization: Bearer {{motorista}}
+
+### RF13 — registrar (use o "id" da lista de entregas)
+POST {{host}}/entregas/1
+Authorization: Bearer {{motorista}}
+Content-Type: application/json
+
+{ "entregue": false, "motivo": "Cliente fechado" }
+
+### RF14 — volta
+POST {{host}}/portaria/volta
+Authorization: Bearer {{porteiro}}
+Content-Type: application/json
+
+{ "qr": "VEICULO:2" }
+
+### RF15 — bipar caixa que voltou
+POST {{host}}/retornos/caixas
+Authorization: Bearer {{conferente}}
+Content-Type: application/json
+
+{ "codigoCaixa": "CX00000009" }

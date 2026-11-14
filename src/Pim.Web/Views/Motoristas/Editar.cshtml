@@ -1,0 +1,14 @@
+@model Motorista
+@{
+    ViewData["Title"] = "Editar motorista";
+}
+
+<h1 class="h3 mb-3">Editar motorista</h1>
+
+<form asp-action="Editar" asp-route-id="@Model.Id" method="post">
+    <partial name="_Formulario" model="Model" />
+    <div class="d-flex flex-wrap gap-2">
+        <button type="submit" class="btn btn-primary">Salvar</button>
+        <a asp-action="Index" class="btn btn-outline-secondary">Voltar</a>
+    </div>
+</form>

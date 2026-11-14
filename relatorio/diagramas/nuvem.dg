@@ -1,0 +1,9 @@
+direction: LR
+dev[Desenvolvedor] -> gh[GitHub\nrepositório]
+gh -> ci(GitHub Actions\nbuild · testes)
+ci -> acr[/Registro de\ncontêineres/] : imagens Docker
+acr -> web[Container App\nPim.Web]
+acr -> api[Container App\nPim.Api]
+web, api -> sql[(Azure SQL\nDatabase)]
+cel[Celulares\n(app Flutter)] -> api
+web, api --> mon[Application Insights\nlogs e alertas]

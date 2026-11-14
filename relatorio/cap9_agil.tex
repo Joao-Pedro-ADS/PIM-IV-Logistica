@@ -1,0 +1,74 @@
+\chapter{GERENCIAMENTO ÁGIL DO PROJETO}
+
+O projeto foi conduzido com uma combinação de Scrum e Kanban. Do Scrum vieram o \textit{backlog} priorizado, as \textit{sprints} de duração fixa com um objetivo cada e a revisão do incremento ao final \cite{schwaber2020}; do Kanban, o quadro com limite de trabalho em andamento e o foco no fluxo \cite{anderson2011}. Por se tratar de um trabalho individual, os papéis de \textit{Product Owner}, \textit{Scrum Master} e desenvolvimento foram acumulados pelo autor, e as cerimônias foram simplificadas para uma revisão escrita ao fim de cada \textit{sprint} \cite{prikladnicki2014}.
+
+\section{Product Backlog e Sprint Backlog}
+
+O \textit{Product Backlog} foi escrito em histórias de usuário, estimadas em pontos pela sequência de Fibonacci e priorizadas pelo valor para o problema central de rastreabilidade \cite{sbrocco2012}. A Tabela~\ref{tab:backlog} apresenta as histórias e a \textit{sprint} em que cada uma entrou; o conjunto de histórias de uma \textit{sprint} forma o seu \textit{Sprint Backlog}.
+
+\begin{table}[htbp]
+\centering
+\caption{Product Backlog}
+\label{tab:backlog}
+\footnotesize
+\begin{tabular}{|c|p{9.4cm}|c|c|c|}
+\hline
+\textbf{ID} & \textbf{História de usuário} & \textbf{Pontos} & \textbf{Prior.} & \textbf{Sprint} \\ \hline
+H01 & Como gestor, quero entender o processo atual e seus problemas para definir o escopo & 3 & Alta & 1 \\ \hline
+H02 & Como equipe, quero o modelo de dados e a carga simulada do ERP & 5 & Alta & 1 \\ \hline
+H03 & Como usuário, quero entrar com login e ver só as funções do meu perfil & 3 & Alta & 2 \\ \hline
+H04 & Como responsável pela frota, quero cadastrar veículos, motoristas e manutenções & 5 & Alta & 2 \\ \hline
+H05 & Como programador de cargas, quero montar carregamentos com as regras aplicadas & 8 & Alta & 2 \\ \hline
+H06 & Como gerente, quero consultar e cancelar pedidos e aprovar entradas com diferença & 5 & Alta & 2 \\ \hline
+H07 & Como conferente, quero bipar a entrada e o retorno das caixas no celular & 8 & Alta & 3 \\ \hline
+H08 & Como operador, quero bipar as caixas que sobem no veículo & 5 & Alta & 3 \\ \hline
+H09 & Como porteiro, quero liberar a saída só com a carga completa & 5 & Alta & 3 \\ \hline
+H10 & Como motorista, quero registrar entregas e não entregas pelo celular & 5 & Alta & 3 \\ \hline
+H11 & Como gestor, quero o histórico completo de cada caixa & 3 & Média & 2 \\ \hline
+H12 & Como equipe, quero o relatório do PIM e o estilo visual das telas web & 5 & Média & 4 \\ \hline
+H13 & Como gestor, quero a solução implantada em nuvem & 8 & Baixa & futura \\ \hline
+H14 & Como operador, quero bipar sem sinal e sincronizar depois & 8 & Baixa & futura \\ \hline
+\end{tabular}
+\fonte{Elaborado pelo autor (2026)}
+\end{table}
+
+\section{Cronograma das sprints e definição das entregas}
+
+As \textit{sprints} tiveram duração de uma semana, encerrando na data de entrega do PIM, como mostra a Tabela~\ref{tab:sprints}. Cada \textit{sprint} gerou um incremento utilizável e testado.
+
+\begin{table}[htbp]
+\centering
+\caption{Cronograma das sprints}
+\label{tab:sprints}
+\footnotesize
+\begin{tabular}{|c|c|p{6cm}|p{5cm}|}
+\hline
+\textbf{Sprint} & \textbf{Período} & \textbf{Objetivo} & \textbf{Entrega} \\ \hline
+1 & 19/10 a 25/10 & Levantamento, requisitos, regras e modelo de dados & Documentação e banco com dados simulados \\ \hline
+2 & 26/10 a 01/11 & Aplicação web com as regras de pedidos, frota e carregamento & Web testado (RF01--RF04, RF07--RF10, RF17--RF19) \\ \hline
+3 & 02/11 a 08/11 & API e aplicativo para as operações de campo & API e app testados (RF05, RF06, RF11--RF16) \\ \hline
+4 & 09/11 a 14/11 & Relatório, estilo das telas web e entrega & Relatório final e sistema completo \\ \hline
+\end{tabular}
+\fonte{Elaborado pelo autor (2026)}
+\end{table}
+
+Uma história só foi considerada concluída quando atendia à \textbf{definição de pronto}: código compilando sem erros, regras de negócio da história implementadas no serviço, teste automatizado cobrindo o fluxo principal e os casos de erro, e documentação atualizada.
+
+\section{Quadro Kanban e indicadores}
+
+O quadro Kanban teve as colunas \textit{A fazer}, \textit{Em andamento} (limite de duas histórias), \textit{Em teste} e \textit{Concluído}. A Tabela~\ref{tab:kanban} mostra a situação do quadro no fim da \textit{sprint} 3.
+
+\begin{table}[htbp]
+\centering
+\caption{Quadro Kanban ao final da sprint 3}
+\label{tab:kanban}
+\footnotesize
+\begin{tabular}{|p{3.4cm}|p{3.4cm}|p{3.4cm}|p{3.4cm}|}
+\hline
+\textbf{A fazer} & \textbf{Em andamento} & \textbf{Em teste} & \textbf{Concluído} \\ \hline
+H13 Nuvem (futura) \newline H14 Modo sem sinal (futura) & H12 Relatório e estilo web & -- & H01 a H11 \\ \hline
+\end{tabular}
+\fonte{Elaborado pelo autor (2026)}
+\end{table}
+
+Os indicadores de acompanhamento foram: a \textbf{velocidade}, em pontos concluídos por \textit{sprint} (8, 24 e 23 pontos nas três primeiras, conforme o \textit{backlog}); o \textbf{gráfico de \textit{burndown}} dos pontos restantes para a entrega; a \textbf{cobertura de requisitos}, isto é, quantos dos dezenove requisitos funcionais estão implementados e testados; e a \textbf{taxa de testes aprovados}, verificada ao final de cada \textit{sprint}. Os valores obtidos são apresentados no capítulo seguinte.

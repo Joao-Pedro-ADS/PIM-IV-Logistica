@@ -1,0 +1,19 @@
+@model Veiculo
+@{
+    ViewData["Title"] = "Etiqueta do veículo";
+}
+
+<h1 class="h3 mb-3 d-print-none">Etiqueta do veículo</h1>
+
+<div class="card shadow-sm text-center mx-auto" style="max-width: 320px">
+    <div class="card-body">
+        <p class="fs-4 fw-bold font-monospace mb-2">Placa: @Model.Placa</p>
+        <img src="@Url.Action("QrCode", new { id = Model.Id })" alt="QR Code do veículo @Model.Placa" width="250" height="250" class="img-fluid" />
+        <p class="small text-body-secondary mt-2 mb-0">Cole no veículo. Lido pelo aplicativo na saída e na volta.</p>
+    </div>
+</div>
+
+<div class="d-flex justify-content-center gap-2 mt-3 d-print-none">
+    <button type="button" class="btn btn-primary" onclick="window.print()">Imprimir</button>
+    <a asp-action="Index" class="btn btn-outline-secondary">Voltar</a>
+</div>

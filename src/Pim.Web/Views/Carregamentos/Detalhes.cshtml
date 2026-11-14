@@ -1,0 +1,103 @@
+@model Carregamento
+@{
+    ViewData["Title"] = $"Carregamento {Model.Id}";
+    var totalCaixas = Model.Pedidos.Sum(cp => cp.PedidoVenda?.TotalCaixas ?? 0);
+    // só para a barra de progresso
+    var percentual = totalCaixas == 0 ? 0 : Math.Min(100, Model.Caixas.Count * 100 / totalCaixas);
+    var completo = Model.Caixas.Count == totalCaixas;
+}
+
+<div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+    <h1 class="h3 mb-0 me-2">Carregamento @Model.Id</h1>
+    <partial name="_Status" model="Model.Status" />
+</div>
+
+<div class="row g-3 mb-4">
+    <div class="col-lg-7">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <dl class="row mb-0">
+                    <dt class="col-sm-4">Data</dt>
+                    <dd class="col-sm-8">@Model.DataPrevista.ToString("dd/MM/yyyy")</dd>
+                    <dt class="col-sm-4">Veículo</dt>
+                    <dd class="col-sm-8">@(Model.Veiculo?.Placa) - @(Model.Veiculo?.Modelo)</dd>
+                    <dt class="col-sm-4">Motorista</dt>
+                    <dd class="col-sm-8">@(Model.Motorista?.Nome)</dd>
+                    <dt class="col-sm-4">Status</dt>
+                    <dd class="col-sm-8">@Model.Status</dd>
+                    <dt class="col-sm-4">Saída</dt>
+                    <dd class="col-sm-8">@(Model.DataSaida?.ToString("dd/MM/yyyy HH:mm") ?? "-")</dd>
+                    <dt class="col-sm-4">Volta</dt>
+                    <dd class="col-sm-8 mb-0">@(Model.DataVolta?.ToString("dd/MM/yyyy HH:mm") ?? "-")</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <div class="text-body-secondary mb-1">Progresso da bipagem (aplicativo)</div>
+                <div class="fs-4 fw-bold @(completo ? "text-success" : "")">
+                    Caixas bipadas: @Model.Caixas.Count de @totalCaixas @(completo ? "(completo)" : "(incompleto)")
+                </div>
+                <div class="progress mt-3" role="progressbar" aria-label="Caixas bipadas"
+                     aria-valuenow="@percentual" aria-valuemin="0" aria-valuemax="100" style="height: 12px">
+                    <div class="progress-bar @(completo ? "bg-success" : "")" style="width: @percentual%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h2 class="h5">Pedidos</h2>
+<div class="card shadow-sm mb-4">
+    <div class="table-responsive">
+        <table class="table align-middle mb-0">
+            <thead class="table-light">
+                <tr><th>Pedido</th><th>Cliente</th><th class="text-end">Caixas</th><th>Entrega</th><th>Motivo</th></tr>
+            </thead>
+            <tbody>
+                @foreach (var cp in Model.Pedidos)
+                {
+                    <tr>
+                        <td><a asp-controller="Pedidos" asp-action="Detalhes" asp-route-id="@cp.PedidoVendaId">@(cp.PedidoVenda?.Numero)</a></td>
+                        <td>@(cp.PedidoVenda?.Cliente?.Nome)</td>
+                        <td class="text-end">@(cp.PedidoVenda?.TotalCaixas)</td>
+                        <td><partial name="_Status" model="cp.Resultado" /></td>
+                        <td>@cp.Motivo</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<h2 class="h5">Caixas no veículo</h2>
+@if (!Model.Caixas.Any())
+{
+    <p class="text-body-secondary">Nenhuma caixa bipada ainda. A bipagem é feita pelo aplicativo.</p>
+}
+else
+{
+    <div class="card shadow-sm mb-4">
+        <div class="table-responsive">
+            <table class="table table-sm align-middle mb-0">
+                <thead class="table-light">
+                    <tr><th>Código</th><th>Produto</th><th>Status</th></tr>
+                </thead>
+                <tbody>
+                    @foreach (var caixa in Model.Caixas)
+                    {
+                        <tr>
+                            <td class="font-monospace">@caixa.Codigo</td>
+                            <td>@(caixa.Produto?.Descricao)</td>
+                            <td><partial name="_Status" model="caixa.Status" /></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+
+<a asp-action="Index" class="btn btn-outline-secondary">Voltar</a>

@@ -1,0 +1,97 @@
+\chapter{PLANEJAMENTO DA SOLUÇÃO TECNOLÓGICA}
+
+\section{Problema, objetivos e público-alvo}
+
+O problema a ser resolvido é a falta de rastreabilidade descrita no capítulo anterior. A solução proposta tem três objetivos: registrar cada movimentação de caixa e de veículo no momento em que ela acontece; aplicar as regras de negócio de forma automática, impedindo erros em vez de apenas registrá-los; e oferecer à gestão a situação atualizada de pedidos, carregamentos, caixas e frota.
+
+O público-alvo são os funcionários da distribuidora: no computador, o gerente, o programador de cargas, o responsável pela frota e o comercial; no celular, o conferente, o operador, o porteiro e o motorista, que precisam de telas simples com leitura de código pela câmera. Indiretamente, os clientes também ganham informação correta sobre seus pedidos.
+
+\section{Proposta de valor, benefícios e diferenciais}
+
+A proposta de valor é \textit{saber onde está cada caixa e cada veículo, a qualquer momento, sem trocar o ERP}. Os benefícios esperados são menos caixas extraviadas e carregamentos incompletos, fim da digitação tardia da conferência, resposta imediata ao cliente e bloqueio de escalas inválidas. Os diferenciais são a integração com o ERP existente, a regra aplicada no momento da leitura, o histórico completo de cada caixa e um aplicativo pensado para quem tem pouca familiaridade digital.
+
+\section{Modelo de negócio e viabilidade}
+
+Para estruturar a solução como produto, foi utilizado o \textit{Business Model Canvas} \cite{osterwalder2011}, que descreve em nove blocos como uma proposta gera e entrega valor. A Tabela~\ref{tab:canvas} apresenta o modelo, considerando que o sistema pode ser oferecido a outras distribuidoras de porte semelhante como serviço por assinatura.
+
+\begin{table}[htbp]
+\centering
+\caption{Business Model Canvas da solução}
+\label{tab:canvas}
+\small
+\begin{tabular}{|p{3.6cm}|p{10.8cm}|}
+\hline
+\textbf{Bloco} & \textbf{Descrição} \\ \hline
+Segmento de clientes & Distribuidoras e atacadistas de médio porte com frota própria e ERP já implantado \\ \hline
+Proposta de valor & Rastreabilidade de caixas e veículos, com regras aplicadas na leitura, sem substituir o ERP \\ \hline
+Canais & Venda direta, demonstração com dados do próprio cliente e implantação assistida \\ \hline
+Relacionamento & Suporte, treinamento das equipes do armazém e evolução contínua por versões \\ \hline
+Fontes de receita & Assinatura mensal por unidade (armazém) e por usuário de celular; taxa de implantação \\ \hline
+Recursos principais & Plataforma (Web, API e aplicativo), infraestrutura em nuvem e equipe de desenvolvimento \\ \hline
+Atividades principais & Desenvolvimento, integração com ERPs, implantação, suporte e operação da nuvem \\ \hline
+Parcerias principais & Fornecedores de ERP, provedor de nuvem e revendas de leitores de código de barras \\ \hline
+Estrutura de custos & Nuvem (banco e contêineres), equipe, suporte e publicação do aplicativo nas lojas \\ \hline
+\end{tabular}
+\fonte{Elaborado pelo autor (2026), com base em \citeonline{osterwalder2011}}
+\end{table}
+
+A viabilidade é \textbf{técnica}, pois a solução usa tecnologias maduras (.NET, SQL Server e Flutter) e celulares comuns como leitores; \textbf{operacional}, pois o ERP continua sendo a fonte de clientes, notas e pedidos; e \textbf{econômica}, pois os custos são recorrentes e proporcionais ao uso, enquanto os ganhos vêm da redução de perdas, de reentregas e de horas de conferência manual.
+
+\section{Requisitos e regras de negócio}
+
+Os requisitos foram levantados a partir das perguntas feitas sobre cada processo do cenário atual \cite{sommerville2018}. A Tabela~\ref{tab:rf} lista os requisitos funcionais e o meio de uso de cada um. Os requisitos não funcionais são: senhas guardadas só como \textit{hash}, acesso por perfil, telas de celular usáveis com uma mão, resposta da API abaixo de um segundo na bipagem, histórico imutável e conformidade com a LGPD \cite{brasil2018lgpd}.
+
+\begin{table}[htbp]
+\centering
+\caption{Requisitos funcionais}
+\label{tab:rf}
+\footnotesize
+\begin{tabular}{|c|p{9cm}|c|p{2.6cm}|}
+\hline
+\textbf{ID} & \textbf{Requisito} & \textbf{Meio} & \textbf{Regras} \\ \hline
+RF01 & Fazer login, com acesso conforme o perfil & Web/App & -- \\ \hline
+RF02 & Cadastrar veículos e gerar o QR Code de cada um & Web & RN09, RN16 \\ \hline
+RF03 & Cadastrar motoristas (nome, CNH e validade) & Web & RN18 \\ \hline
+RF04 & Importar do ERP clientes, produtos, notas e pedidos (simulado) & Sistema & RN04 \\ \hline
+RF05 & Registrar a chegada do veículo do fornecedor & App & -- \\ \hline
+RF06 & Bipar as caixas da entrada, conferindo com a nota & App & RN01, RN02 \\ \hline
+RF07 & Finalizar a entrada; com diferença, exigir o gerente & App/Web & RN03 \\ \hline
+RF08 & Consultar os pedidos de venda e o status de cada um & Web & RN05 \\ \hline
+RF09 & Cancelar pedido antes de o veículo sair & Web & RN07 \\ \hline
+RF10 & Criar carregamento com veículo, motorista, data e pedidos & Web & RN06, 08, 09, 17--19 \\ \hline
+RF11 & Bipar o QR do veículo e as caixas que sobem nele & App & RN10 \\ \hline
+RF12 & Registrar a saída, só com todas as caixas bipadas & App & RN11, RN12 \\ \hline
+RF13 & Registrar cada pedido como entregue ou não entregue & App & RN13 \\ \hline
+RF14 & Registrar a volta do veículo pelo QR Code & App & RN12 \\ \hline
+RF15 & Bipar as caixas que voltaram e reabrir o pedido & App & RN14 \\ \hline
+RF16 & Encerrar o carregamento após registrar as entregas & Sistema & RN15 \\ \hline
+RF17 & Colocar e tirar um veículo de manutenção & Web & RN16, RN17 \\ \hline
+RF18 & Consultar a situação de cada veículo & Web & RN16 \\ \hline
+RF19 & Consultar o histórico de uma caixa pelo código & Web & RN01 \\ \hline
+\end{tabular}
+\fonte{Elaborado pelo autor (2026)}
+\end{table}
+
+As regras de negócio da Tabela~\ref{tab:rn} são aplicadas pelos serviços do sistema e, nos casos mais críticos, também pelo banco de dados.
+
+\begin{table}[htbp]
+\centering
+\caption{Regras de negócio}
+\label{tab:rn}
+\footnotesize
+\begin{tabular}{|c|p{5.9cm}|c|p{5.9cm}|}
+\hline
+\textbf{ID} & \textbf{Regra} & \textbf{ID} & \textbf{Regra} \\ \hline
+RN01 & Toda caixa recebe etiqueta com código único na entrada & RN11 & O veículo só sai com todas as caixas do carregamento bipadas \\ \hline
+RN02 & Só entra caixa de produto que está na nota fiscal & RN12 & Saída e volta registram veículo, motorista e horário \\ \hline
+RN03 & Entrada com diferença só é aceita pelo gerente & RN13 & Pedido não entregue exige motivo \\ \hline
+RN04 & Os pedidos vêm do ERP; o sistema não cria pedidos & RN14 & Caixas que voltam são bipadas e o pedido volta para Aberto \\ \hline
+RN05 & Status: Aberto, Em carregamento, Em rota, Entregue ou Não entregue & RN15 & O carregamento termina quando todos os pedidos têm entrega registrada \\ \hline
+RN06 & O pedido vai inteiro em um único carregamento & RN16 & Situação do veículo: Disponível, Em rota ou Em manutenção \\ \hline
+RN07 & O pedido só é cancelado antes de o veículo sair & RN17 & Veículo em manutenção não entra em carregamento \\ \hline
+RN08 & Carregamento tem veículo, motorista, data e pedidos & RN18 & Motorista com CNH vencida não pode ser escalado \\ \hline
+RN09 & As caixas não podem passar do limite do veículo & RN19 & Veículo ou motorista em um carregamento por vez \\ \hline
+RN10 & Caixa que não pertence ao carregamento é recusada & & \\ \hline
+\end{tabular}
+\fonte{Elaborado pelo autor (2026)}
+\end{table}

@@ -1,0 +1,50 @@
+@model List<Carregamento>
+@{
+    ViewData["Title"] = "Carregamentos";
+}
+
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+    <h1 class="h3 mb-0">Carregamentos</h1>
+    <a asp-action="Criar" class="btn btn-primary">Novo carregamento</a>
+</div>
+
+<div class="card shadow-sm">
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Nº</th>
+                    <th>Data</th>
+                    <th>Veículo</th>
+                    <th>Motorista</th>
+                    <th class="text-end">Pedidos</th>
+                    <th>Caixas bipadas</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var c in Model)
+                {
+                    var totalCaixas = c.Pedidos.Sum(cp => cp.PedidoVenda?.TotalCaixas ?? 0);
+                    var completo = totalCaixas > 0 && c.Caixas.Count >= totalCaixas;
+                    <tr>
+                        <td class="fw-semibold">@c.Id</td>
+                        <td>@c.DataPrevista.ToString("dd/MM/yyyy")</td>
+                        <td class="font-monospace">@(c.Veiculo?.Placa)</td>
+                        <td>@(c.Motorista?.Nome)</td>
+                        <td class="text-end">@c.Pedidos.Count</td>
+                        <td class="@(completo ? "text-success fw-semibold" : "")">@c.Caixas.Count de @totalCaixas</td>
+                        <td><partial name="_Status" model="c.Status" /></td>
+                        <td class="text-end"><a asp-action="Detalhes" asp-route-id="@c.Id" class="btn btn-sm btn-outline-primary">Detalhes</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@if (!Model.Any())
+{
+    <p class="text-body-secondary mt-3">Nenhum carregamento cadastrado.</p>
+}

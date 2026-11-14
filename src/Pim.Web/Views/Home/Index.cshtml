@@ -1,0 +1,48 @@
+@{
+    ViewData["Title"] = "Início";
+}
+
+<h1 class="h3 mb-4">Olá, @User.Identity?.Name</h1>
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-3">
+    <div class="col">
+        <div class="card h-100 shadow-sm border-0 border-start border-primary border-4">
+            <div class="card-body">
+                <div class="numero-painel text-primary">@ViewBag.PedidosAbertos</div>
+                <div class="text-body-secondary mt-2">Pedidos abertos</div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card h-100 shadow-sm border-0 border-start border-info border-4">
+            <div class="card-body">
+                <div class="numero-painel text-info-emphasis">@ViewBag.CarregamentosEmRota</div>
+                <div class="text-body-secondary mt-2">Carregamentos em rota</div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card h-100 shadow-sm border-0 border-start border-success border-4">
+            <div class="card-body">
+                <div class="numero-painel text-success">@ViewBag.VeiculosDisponiveis</div>
+                <div class="text-body-secondary mt-2">Veículos disponíveis</div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card h-100 shadow-sm border-0 border-start border-warning border-4">
+            <div class="card-body">
+                <div class="numero-painel text-warning-emphasis">@ViewBag.RecebimentosPendentes</div>
+                <div class="text-body-secondary mt-2">Recebimentos aguardando aprovação</div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card h-100 shadow-sm border-0 border-start border-danger border-4">
+            <div class="card-body">
+                <div class="numero-painel text-danger">@ViewBag.CnhVencendo</div>
+                <div class="text-body-secondary mt-2">Motoristas com CNH vencida ou vencendo em 30 dias</div>
+            </div>
+        </div>
+    </div>
+</div>

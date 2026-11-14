@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - PIM</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+@{
+    // controller da página atual, para destacar o item do menu
+    var atual = ViewContext.RouteData.Values["controller"]?.ToString();
+    string Ativo(string controller) => atual == controller ? "nav-link active" : "nav-link";
+}
+<body class="bg-body-tertiary">
+    <header>
+        @if (User.Identity?.IsAuthenticated == true)
+        {
+            <nav class="navbar navbar-expand-xl navbar-dark bg-primary shadow-sm d-print-none">
+                <div class="container">
+                    <a class="navbar-brand fw-semibold" asp-controller="Home" asp-action="Index">PIM Logística</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu"
+                            aria-controls="menu" aria-expanded="false" aria-label="Abrir menu">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="menu">
+                        <ul class="navbar-nav me-auto">
+                            <li class="nav-item"><a class="@Ativo("Home")" asp-controller="Home" asp-action="Index">Início</a></li>
+
+                            @if (User.IsInRole("Gerente") || User.IsInRole("Comercial") || User.IsInRole("Programador"))
+                            {
+                                <li class="nav-item"><a class="@Ativo("Pedidos")" asp-controller="Pedidos" asp-action="Index">Pedidos</a></li>
+                            }
+                            @if (User.IsInRole("Gerente") || User.IsInRole("Programador"))
+                            {
+                                <li class="nav-item"><a class="@Ativo("Carregamentos")" asp-controller="Carregamentos" asp-action="Index">Carregamentos</a></li>
+                            }
+                            @if (User.IsInRole("Gerente"))
+                            {
+                                <li class="nav-item"><a class="@Ativo("Recebimentos")" asp-controller="Recebimentos" asp-action="Index">Recebimentos</a></li>
+                                <li class="nav-item"><a class="@Ativo("Caixas")" asp-controller="Caixas" asp-action="Index">Rastrear caixa</a></li>
+                            }
+                            @if (User.IsInRole("Gerente") || User.IsInRole("Frota") || User.IsInRole("Programador"))
+                            {
+                                <li class="nav-item"><a class="@Ativo("Veiculos")" asp-controller="Veiculos" asp-action="Index">Veículos</a></li>
+                            }
+                            @if (User.IsInRole("Gerente") || User.IsInRole("Frota"))
+                            {
+                                <li class="nav-item"><a class="@Ativo("Motoristas")" asp-controller="Motoristas" asp-action="Index">Motoristas</a></li>
+                            }
+                        </ul>
+
+                        <div class="d-flex align-items-center gap-3">
+                            <span class="navbar-text text-white text-nowrap">@User.Identity.Name</span>
+                            <form asp-controller="Conta" asp-action="Sair" method="post" class="d-flex">
+                                <button type="submit" class="btn btn-outline-light btn-sm">Sair</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        }
+    </header>
+
+    <main class="container py-4">
+        @if (TempData["Mensagem"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                @TempData["Mensagem"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+            </div>
+        }
+        @if (TempData["Erro"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                @TempData["Erro"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+            </div>
+        }
+
+        @RenderBody()
+    </main>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

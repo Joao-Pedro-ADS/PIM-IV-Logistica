@@ -1,0 +1,6 @@
+direction: LR
+web[Pim.Web\nASP.NET Core MVC\n(computador)] -> core[Pim.Core\nEntidades · Serviços\nDbContext (EF Core)]
+app[Aplicativo Flutter\n(celular)] -->|HTTP + JWT| api[Pim.Api\nMinimal API REST]
+api -> core
+core -> db[(SQL Server\ntriggers e procedures)]
+erp[ERP\n(simulado)] -->|carga de dados| db

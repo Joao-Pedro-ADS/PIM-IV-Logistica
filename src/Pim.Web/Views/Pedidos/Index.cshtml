@@ -1,0 +1,59 @@
+@model List<PedidoVenda>
+@{
+    ViewData["Title"] = "Pedidos de venda";
+}
+
+<h1 class="h3 mb-3">Pedidos de venda</h1>
+
+<form asp-action="Index" method="get" class="row g-2 mb-3">
+    <div class="col-sm-4 col-lg-3">
+        <select name="status" class="form-select" aria-label="Status">
+            <option value="">Todos os status</option>
+            @foreach (var s in Enum.GetValues<StatusPedido>())
+            {
+                <option value="@s" selected="@(ViewBag.Status == s)">@s</option>
+            }
+        </select>
+    </div>
+    <div class="col-sm-5 col-lg-4">
+        <input name="busca" value="@ViewBag.Busca" placeholder="Número ou cliente" class="form-control" aria-label="Busca" />
+    </div>
+    <div class="col-sm-3 col-lg-2">
+        <button type="submit" class="btn btn-primary w-100">Filtrar</button>
+    </div>
+</form>
+
+<div class="card shadow-sm">
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Número</th>
+                    <th>Cliente</th>
+                    <th>Data</th>
+                    <th class="text-end">Caixas</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var p in Model)
+                {
+                    <tr>
+                        <td class="fw-semibold">@p.Numero</td>
+                        <td>@(p.Cliente?.Nome)</td>
+                        <td>@p.DataEmissao.ToString("dd/MM/yyyy")</td>
+                        <td class="text-end">@p.TotalCaixas</td>
+                        <td><partial name="_Status" model="p.Status" /></td>
+                        <td class="text-end"><a asp-action="Detalhes" asp-route-id="@p.Id" class="btn btn-sm btn-outline-primary">Detalhes</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@if (!Model.Any())
+{
+    <p class="text-body-secondary mt-3">Nenhum pedido encontrado.</p>
+}

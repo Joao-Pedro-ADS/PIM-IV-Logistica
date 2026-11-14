@@ -1,0 +1,46 @@
+@model List<Motorista>
+@{
+    ViewData["Title"] = "Motoristas";
+}
+
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+    <h1 class="h3 mb-0">Motoristas</h1>
+    <a asp-action="Criar" class="btn btn-primary">Novo motorista</a>
+</div>
+
+<div class="card shadow-sm">
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Nome</th>
+                    <th>CPF</th>
+                    <th>CNH</th>
+                    <th>Validade da CNH</th>
+                    <th>Situação da CNH</th>
+                    <th>Login do app</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var m in Model)
+                {
+                    var dias = (m.ValidadeCnh.Date - DateTime.Today).Days;
+                    var situacaoCnh = dias < 0 ? "Vencida" : dias <= 30 ? $"Vence em {dias} dias" : "Válida";
+                    // LGPD: mostra só parte do CPF
+                    var cpfMascarado = $"***.{m.Cpf.Substring(3, 3)}.{m.Cpf.Substring(6, 3)}-**";
+
+                    <tr>
+                        <td class="fw-semibold">@m.Nome</td>
+                        <td class="font-monospace">@cpfMascarado</td>
+                        <td class="font-monospace">@m.NumeroCnh</td>
+                        <td>@m.ValidadeCnh.ToString("dd/MM/yyyy")</td>
+                        <td><partial name="_Status" model="situacaoCnh" /></td>
+                        <td>@(m.Usuario?.Nome ?? "-")</td>
+                        <td class="text-end"><a asp-action="Editar" asp-route-id="@m.Id" class="btn btn-sm btn-outline-primary">Editar</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+# .NET
+bin/
+obj/
+*.user
+.vs/
+
+# Flutter / Android (o app/ tem o seu próprio .gitignore também)
+app/build/
+app/.dart_tool/
+app/android/.gradle/
+app/android/.kotlin/
+app/android/local.properties
+*.iml
+.idea/
+
+# LaTeX: arquivos gerados (o 0_main.pdf fica, para leitura do relatório)
+relatorio/*.aux
+relatorio/*.bbl
+relatorio/*.blg
+relatorio/*.listing
+relatorio/*.lof
+relatorio/*.log
+relatorio/*.lot
+relatorio/*.toc
+relatorio/*.out
+
+# Editor de notas
+.obsidian/
+
+# Material da UNIP (não é de autoria do projeto)
+Manual_PIM_IV*
+
+# Diversos
+__pycache__/
+.DS_Store

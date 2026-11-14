@@ -1,0 +1,16 @@
+@model object
+@{
+    // Só aparência: escolhe a cor do selo pelo texto do status/situação
+    var texto = Model?.ToString() ?? "";
+    var cor = texto switch
+    {
+        "Entregue" or "Disponivel" or "Finalizado" or "Encerrado" or "Válida" => "text-bg-success",
+        "EmRota" or "Carregada" => "text-bg-primary",
+        "EmCarregamento" or "Planejado" or "EmAndamento" or "NoArmazem" => "text-bg-info",
+        "AguardandoAprovacao" or "EmManutencao" or "Pendente" => "text-bg-warning",
+        "NaoEntregue" or "Cancelado" or "Vencida" => "text-bg-danger",
+        _ when texto.StartsWith("Vence em") => "text-bg-warning",
+        _ => "text-bg-secondary"
+    };
+}
+<span class="badge rounded-pill @cor">@texto</span>

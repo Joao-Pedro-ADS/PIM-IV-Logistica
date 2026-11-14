@@ -1,0 +1,346 @@
+\ProvidesPackage{estilo}
+
+% -----------------------------------------------------------
+% 1. CARREGAMENTO DE PACOTES
+% -----------------------------------------------------------
+\RequirePackage[T1]{fontenc}
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[brazil]{babel}
+\RequirePackage{times} % Força a fonte Times New Roman
+\RequirePackage{microtype}
+\RequirePackage{indentfirst}
+\RequirePackage{geometry}
+\RequirePackage{geometry}
+\RequirePackage{graphicx}
+\RequirePackage{float}
+\RequirePackage{amsmath} % \text{}, equation tools (fixes "Is \usepackage{amsmath} missing?")
+\RequirePackage{amssymb} % extra symbols (optional but commonly paired)
+\RequirePackage[alf]{abntex2cite} % Citações ABNT
+\RequirePackage{ifthen}
+\RequirePackage{filecontents}
+\usepackage{tocloft}
+
+% Adiciona proteção contra ausência do tocloft
+\makeatletter
+\@ifpackageloaded{tocloft}{}{
+  \RequirePackage{tocloft}
+}
+\makeatother
+
+% Configuração do hyperref (deve ser um dos últimos)
+\RequirePackage{hyperref}
+\hypersetup{
+    hidelinks,
+    colorlinks=false,
+    pdfborder={0 0 0}
+}
+
+\RequirePackage{multicol, multirow}
+\RequirePackage{listings}
+\RequirePackage{tcolorbox}
+\tcbuselibrary{listings, skins, breakable}
+\RequirePackage{caption}
+\RequirePackage{subcaption}
+\RequirePackage{rotating} % sidewaysfigure: capturas de tela em página horizontal
+
+% Floats: deixa tabelas e figuras ocuparem mais da página e evita páginas
+% com pouco texto e muito espaço em branco
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\bottomfraction}{0.6}
+\renewcommand{\textfraction}{0.12}
+\renewcommand{\floatpagefraction}{0.75}
+\setcounter{topnumber}{3}
+\setcounter{bottomnumber}{2}
+\setcounter{totalnumber}{5}
+\setlength{\textfloatsep}{12pt plus 2pt minus 2pt}
+\setlength{\floatsep}{10pt plus 2pt minus 2pt}
+\setlength{\intextsep}{12pt plus 2pt minus 2pt}
+
+% -----------------------------------------------------------
+% 2. CONFIGURAÇÕES ABNT E LAYOUT
+% -----------------------------------------------------------
+% Força Times New Roman
+\renewcommand{\rmdefault}{ptm}
+\renewcommand{\sfdefault}{ptm}
+\renewcommand{\ttdefault}{pcr}
+
+% Configurações de página conforme ABNT
+\geometry{
+    a4paper,
+    left=3cm,
+    top=3cm,
+    right=2cm,
+    bottom=2cm
+}
+
+% Configurações de parágrafo conforme ABNT
+\setlength{\parindent}{1.25cm}
+\setlength{\parskip}{0pt}
+
+% -----------------------------------------------------------
+% 3. CONFIGURAÇÃO DO SUMÁRIO (ESTILO OLIVEIRA)
+% -----------------------------------------------------------
+\makeatletter
+
+% Remove os pontilhados do sumário (se existir)
+\@ifundefined{cftdot}{}{\renewcommand{\cftdot}{}}
+
+% Configuração para capítulos no sumário
+\@ifundefined{cftchapfont}{}{
+  \renewcommand{\cftchapfont}{\bfseries\uppercase}
+  \renewcommand{\cftchappagefont}{\bfseries}
+  \renewcommand{\cftchapafterpnum}{\vskip 0pt}
+  \setlength{\cftbeforechapterskip}{12pt}
+}
+
+% Configuração para seções (aninhadas no sumário)
+\@ifundefined{cftsecfont}{}{
+  \renewcommand{\cftsecfont}{\normalfont}
+  \renewcommand{\cftsecpagefont}{\normalfont}
+  \setlength{\cftbeforesecskip}{6pt}
+  % nível 1: seção
+  \setlength{\cftsecindent}{1.25cm}
+  \setlength{\cftsecnumwidth}{1.8cm}
+}
+
+% Configuração para subseções (aninhadas no sumário)
+\@ifundefined{cftsubsecfont}{}{
+  \renewcommand{\cftsubsecfont}{\normalfont}
+  \renewcommand{\cftsubsecpagefont}{\normalfont}
+  \setlength{\cftbeforesubsecskip}{0pt}
+  % nível 2: subseção
+  \setlength{\cftsubsecindent}{2.5cm}
+  \setlength{\cftsubsecnumwidth}{2.2cm}
+}
+
+% Configuração para subsubseções (aninhadas no sumário)
+\@ifundefined{cftsubsubsecfont}{}{
+  \renewcommand{\cftsubsubsecfont}{\normalfont}
+  \renewcommand{\cftsubsubsecpagefont}{\normalfont}
+  \setlength{\cftbeforesubsubsecskip}{0pt}
+  % nível 3: subsubseção
+  \setlength{\cftsubsubsecindent}{3.75cm}
+  \setlength{\cftsubsubsecnumwidth}{2.8cm}
+}
+
+% Título do sumário
+\@ifundefined{cfttoctitlefont}{}{
+  \renewcommand{\cfttoctitlefont}{\hfill\bfseries\uppercase}
+  \renewcommand{\cftaftertoctitle}{\hfill}
+}
+\makeatother
+
+% -----------------------------------------------------------
+% 4. CONFIGURAÇÃO DOS TÍTULOS DE CAPÍTULOS E SEÇÕES
+% -----------------------------------------------------------
+
+% -----------------------------------------------------------
+% 5. LISTAS DE FIGURAS E TABELAS
+% -----------------------------------------------------------
+\makeatletter
+\@ifundefined{cftfigfont}{}{
+  \renewcommand{\cftfigfont}{Figura }
+  \renewcommand{\cftfigaftersnum}{ - }
+  \renewcommand{\cftfigpagefont}{\normalfont}
+  \setlength{\cftbeforefigskip}{6pt}
+  \renewcommand{\cftloftitlefont}{\hfill\bfseries\uppercase}
+  \renewcommand{\cftafterloftitle}{\hfill}
+}
+
+\@ifundefined{cfttabfont}{}{
+  \renewcommand{\cfttabfont}{Tabela }
+  \renewcommand{\cfttabaftersnum}{ - }
+  \renewcommand{\cfttabpagefont}{\normalfont}
+  \setlength{\cftbeforetabskip}{6pt}
+  \renewcommand{\cftlottitlefont}{\hfill\bfseries\uppercase}
+  \renewcommand{\cftafterlottitle}{\hfill}
+}
+\makeatother
+
+% -----------------------------------------------------------
+% 6. CONFIGURAÇÃO DE LEGENDAS
+% -----------------------------------------------------------
+\captionsetup{
+    font=small,
+    labelfont=bf,
+    textfont=normalfont,
+    justification=justified,
+    singlelinecheck=false,
+    labelsep=endash
+}
+\captionsetup[figure]{name=Figura}
+\captionsetup[table]{name=Tabela}
+
+% -----------------------------------------------------------
+% 7. ESTILO PARA BLOCOS DE CÓDIGO
+% -----------------------------------------------------------
+
+\definecolor{codebg}{RGB}{248,249,250}
+\definecolor{codeframe}{RGB}{180,180,180}
+\definecolor{codekeyword}{RGB}{0,102,204}
+\definecolor{codestring}{RGB}{163,21,21}
+\definecolor{codecomment}{RGB}{106,106,106}
+\definecolor{codeidentifier}{RGB}{0,0,0}
+
+\lstdefinelanguage{Pseudo}{
+  morekeywords={func,return,if,else,for,while,break,continue,True,False},
+  sensitive=true,
+  morecomment=[l]{//},
+  morestring=[b]"
+}
+
+% Estilo mystyle para \lstlisting (usado nos trechos de código extraídos)
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    literate=
+       {á}{{\'a}}1 {à}{{\`a}}1 {ã}{{\~a}}1 {â}{{\^a}}1
+       {Á}{{\'A}}1 {À}{{\`A}}1 {Ã}{{\~A}}1 {Â}{{\^A}}1
+       {é}{{\'e}}1 {ê}{{\^e}}1 {É}{{\'E}}1 {Ê}{{\^E}}1
+       {í}{{\'i}}1 {Í}{{\'I}}1
+       {ó}{{\'o}}1 {ô}{{\^o}}1 {õ}{{\~o}}1 {Ó}{{\'O}}1 {Ô}{{\^O}}1 {Õ}{{\~O}}1
+       {ú}{{\'u}}1 {Ú}{{\'U}}1
+       {ç}{{\c{c}}}1 {Ç}{{\c{C}}}1
+}
+
+\renewcommand{\lstlistingname}{C\'odigo}
+
+\newtcblisting{codeblock}[2][]{%
+  listing only,
+  listing options={
+    % wrap the language value in braces to avoid keyval parsing issues
+    % with values like [Sharp]C (can otherwise trigger Runaway argument)
+    language={#2},
+    basicstyle=\ttfamily\footnotesize,
+    keywordstyle=\color{codekeyword}\bfseries,
+    commentstyle=\color{codecomment}\itshape,
+    stringstyle=\color{codestring},
+    identifierstyle=\color{codeidentifier},
+    showstringspaces=false,
+    numbers=none,
+    breaklines=true,
+    breakatwhitespace=true,
+    tabsize=2,
+    aboveskip=0pt,
+    belowskip=0pt,
+    literate=
+       {á}{{\'a}}1 {à}{{\`a}}1 {ã}{{\~a}}1 {â}{{\^a}}1
+       {Á}{{\'A}}1 {À}{{\`A}}1 {Ã}{{\~A}}1 {Â}{{\^A}}1
+       {é}{{\'e}}1 {ê}{{\^e}}1 {É}{{\'E}}1 {Ê}{{\^E}}1
+       {í}{{\'i}}1 {Í}{{\'I}}1
+       {ó}{{\'o}}1 {ô}{{\^o}}1 {õ}{{\~o}}1 {Ó}{{\'O}}1 {Ô}{{\^O}}1 {Õ}{{\~O}}1
+       {ú}{{\'u}}1 {Ú}{{\'U}}1
+       {ç}{{\c{c}}}1 {Ç}{{\c{C}}}1
+  },
+  colback=codebg,
+  colframe=codeframe,
+  coltitle=black,
+  sharp corners=all,
+  rounded corners,
+  boxrule=0.5pt,
+  boxsep=2pt,
+  top=2pt,
+  bottom=2pt,
+  left=4pt,
+  right=4pt,
+  enhanced,
+  attach boxed title to top left={yshift=-1.5mm, xshift=4mm},
+  title={#1},
+  fonttitle=\bfseries\footnotesize,
+  colbacktitle=codebg,
+}
+
+% -----------------------------------------------------------
+% 8. CONFIGURAÇÕES DE TIKZ
+% -----------------------------------------------------------
+\RequirePackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows, positioning}
+
+\tikzstyle{startstop} = [rectangle, rounded corners=5pt,
+    minimum width=3cm, minimum height=1cm, text centered,
+    draw=black, fill=gray!20, font=\footnotesize]
+
+\tikzstyle{process} = [rectangle,
+    minimum width=3cm, minimum height=1cm, text centered,
+    draw=black, fill=teal!10!gray!20, font=\footnotesize]
+
+\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110,
+    minimum width=3cm, minimum height=1cm, text centered,
+    draw=black, fill=blue!5!gray!25, font=\footnotesize]
+
+\tikzstyle{decision} = [diamond, aspect=2,
+    minimum size=1cm, text centered, draw=black,
+    fill=orange!10!gray!20, font=\footnotesize]
+
+\tikzstyle{module} = [rectangle, minimum width=4cm, minimum height=0.7cm,
+    text centered, draw=black, dashed,
+    fill=gray!10!white, font=\footnotesize]
+
+\tikzstyle{arrow} = [thick,->,>=stealth]
+
+% -----------------------------------------------------------
+% 9. COMANDOS PERSONALIZADOS
+% -----------------------------------------------------------
+
+% Evita erro de redefinição de \fonte
+\providecommand{\fonte}[1]{%
+  \vspace{-0.2cm}
+  \begin{flushleft}
+    \small{Fonte: #1}
+  \end{flushleft}
+  \vspace{0.3cm}
+}
+
+% Comando para equações numeradas
+\newcommand{\eq}[1]{(\ref{#1})}
+
+% -----------------------------------------------------------
+% 10. CONFIGURAÇÕES FINAIS
+% -----------------------------------------------------------
+
+% Section
+\cftsetindents{section}{0em}{3em}
+
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
+\setlist{noitemsep, topsep=0pt, parsep=0pt, partopsep=0pt}
+
+
+% -----------------------------------------------------------
+% 11. AJUSTES ABNT (PIM IV)
+% -----------------------------------------------------------
+% Títulos dos capítulos em 12pt, negrito e caixa alta, sem hifenização
+\renewcommand{\ABNTEXchapterfont}{\rmfamily\bfseries}
+\renewcommand{\ABNTEXchapterfontsize}{\normalsize}
+\renewcommand{\ABNTEXsectionfontsize}{\normalsize}
+\renewcommand{\ABNTEXsubsectionfontsize}{\normalsize}
+\setlength{\beforechapskip}{0pt}
+\setlength{\afterchapskip}{18pt}
+\renewcommand{\chaptitlefont}{\ABNTEXchapterfont\ABNTEXchapterfontsize\hyphenpenalty=10000}
+
+% Cabeçalho: só o número da página no canto superior direito (ABNT)
+\makepagestyle{pimPagina}
+\makeoddhead{pimPagina}{}{}{\footnotesize\thepage}
+\makeevenhead{pimPagina}{}{}{\footnotesize\thepage}
+\aliaspagestyle{chapter}{pimPagina}
+
+\endinput

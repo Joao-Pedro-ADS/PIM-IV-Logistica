@@ -1,0 +1,73 @@
+@{
+    ViewData["Title"] = "Novo carregamento";
+    var veiculos = (List<Veiculo>)ViewBag.Veiculos;
+    var motoristas = (List<Motorista>)ViewBag.Motoristas;
+    var pedidos = (List<PedidoVenda>)ViewBag.Pedidos;
+}
+
+<h1 class="h3 mb-3">Novo carregamento</h1>
+
+@if (ViewBag.Erro != null)
+{
+    <div class="alert alert-danger" role="alert">@ViewBag.Erro</div>
+}
+
+<form asp-action="Criar" method="post">
+    <div class="card shadow-sm mb-3">
+        <div class="card-body">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label for="veiculoId" class="form-label">Veículo</label>
+                    <select id="veiculoId" name="veiculoId" class="form-select">
+                        @foreach (var v in veiculos)
+                        {
+                            <option value="@v.Id">@v.Placa - @v.Modelo (até @v.LimiteCaixas caixas) - @v.Situacao</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="motoristaId" class="form-label">Motorista</label>
+                    <select id="motoristaId" name="motoristaId" class="form-select">
+                        @foreach (var m in motoristas)
+                        {
+                            <option value="@m.Id">@m.Nome (CNH válida até @m.ValidadeCnh.ToString("dd/MM/yyyy"))</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="col-md-4">
+                    <label for="dataPrevista" class="form-label">Data</label>
+                    <input type="date" id="dataPrevista" name="dataPrevista" class="form-control" value="@DateTime.Today.ToString("yyyy-MM-dd")" required />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <fieldset class="card shadow-sm mb-3">
+        <legend class="card-header fs-6 fw-semibold mb-0">Pedidos abertos</legend>
+        @if (!pedidos.Any())
+        {
+            <div class="card-body text-body-secondary">Nenhum pedido aberto.</div>
+        }
+        else
+        {
+            <div class="list-group list-group-flush">
+                @foreach (var p in pedidos)
+                {
+                    <label class="list-group-item list-group-item-action d-flex gap-3 align-items-center">
+                        <input type="checkbox" name="pedidoIds" value="@p.Id" class="form-check-input flex-shrink-0 mt-0" />
+                        <span>
+                            Pedido @p.Numero - @(p.Cliente?.Nome) - @p.TotalCaixas caixas
+                        </span>
+                    </label>
+                }
+            </div>
+        }
+    </fieldset>
+
+    <div class="d-flex flex-wrap gap-2">
+        <button type="submit" class="btn btn-primary">Criar carregamento</button>
+        <a asp-action="Index" class="btn btn-outline-secondary">Voltar</a>
+    </div>
+</form>

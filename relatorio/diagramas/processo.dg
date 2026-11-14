@@ -1,0 +1,10 @@
+direction: LR
+forn[Fornecedor] -> ent[Entrada\nde caixas]
+ent -> arm[(Armazém)]
+ped[Pedido\n(ERP)] -> car[Carregamento]
+arm -> car
+car -> sai[Saída pela\nportaria]
+sai -> rota[Veículo\nem rota]
+rota -> cli[Cliente]
+rota -> ret[Retorno do\nveículo]
+ret -->|não entregues| arm
