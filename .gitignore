@@ -26,3 +26,5 @@ Manual_PIM_IV*
 # Diversos
 __pycache__/
 .DS_Store
+docs/
+relatorio/

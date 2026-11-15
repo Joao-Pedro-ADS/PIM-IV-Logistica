@@ -1,9 +1,0 @@
-\chapter{CONCLUSÃO}
-
-Este trabalho partiu de um problema concreto de uma distribuidora com frota própria: a falta de rastreabilidade das caixas e dos veículos, consequência de processos controlados em papel, planilhas e mensagens. O objetivo de propor e desenvolver uma solução integrada para esse problema foi atingido. A aplicação web atende a gestão, a logística e a frota; a API e o aplicativo levam o registro para o lugar onde as coisas acontecem --- a doca, o veículo, a portaria e o cliente --- por meio da leitura de códigos com a câmera do celular.
-
-O ponto central da solução é que as regras deixam de ser lembradas pelas pessoas e passam a ser aplicadas pelo sistema no momento da leitura. A caixa que não pertence ao carregamento é recusada, o veículo só sai com a carga completa, o pedido não entregue exige motivo e volta a ficar disponível quando suas caixas retornam. Concentrar essas regras em serviços compartilhados pelo Web e pela API, e reforçar as mais críticas no próprio banco, mostrou-se uma decisão de arquitetura acertada: a mesma regra vale em qualquer canal, e os testes de ponta a ponta comprovaram o funcionamento do ciclo completo de um pedido.
-
-O projeto integrou os conteúdos das disciplinas do semestre: o modelo de negócio e a análise de viabilidade, as ações de inclusão e acessibilidade, o desenvolvimento web e mobile, a arquitetura orientada a objetos, o banco de dados com \textit{triggers} e \textit{procedures}, a proposta de nuvem com contêineres e integração contínua e o planejamento com Scrum e Kanban.
-
-Como trabalhos futuros, ficam a operação sem sinal com sincronização posterior, a integração contínua com o ERP, a implantação da proposta de nuvem e a evolução da arquitetura para um monólito modular, com fronteiras claras entre entrada, frota e expedição. Essas evoluções aproximariam a solução de um produto pronto para ser oferecido a outras distribuidoras, como previsto no modelo de negócio.

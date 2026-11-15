@@ -1,8 +1,0 @@
-direction: LR
-ini((ERP)) -> aberto(Aberto)
-aberto -> emcar(Em\ncarregamento) : RF10
-emcar -> emrota(Em rota) : saída RF12
-emrota -> ent(Entregue) : RF13
-emrota -> nao(Não\nentregue) : RF13 + motivo
-aberto, emcar -> canc(Cancelado) : RF09
-nao -->|retorno RF15| aberto
