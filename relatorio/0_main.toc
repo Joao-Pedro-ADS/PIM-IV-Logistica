@@ -1,0 +1,68 @@
+\changetocdepth {4}
+\babel@toc {brazil}{}\relax 
+\setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
+\setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
+\setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
+\setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
+\contentsline {chapter}{\chapternumberline {1}\MakeTextUppercase []{INTRODUÇÃO}}{9}{chapter.1}%
+\setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
+\contentsline {chapter}{\chapternumberline {2}\MakeTextUppercase []{CARACTERIZAÇÃO DA ORGANIZAÇÃO}}{10}{chapter.2}%
+\setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
+\contentsline {chapter}{\chapternumberline {3}\MakeTextUppercase []{PLANEJAMENTO DA SOLUÇÃO TECNOLÓGICA}}{12}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Problema, objetivos e público-alvo}{12}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Proposta de valor, benefícios e diferenciais}{12}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Modelo de negócio e viabilidade}{12}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Requisitos e regras de negócio}{12}{section.3.4}%
+\setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
+\contentsline {chapter}{\chapternumberline {4}\MakeTextUppercase []{RESPONSABILIDADE SOCIAL, DIVERSIDADE E INCLUSÃO}}{15}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Combate à discriminação e valorização da diversidade}{15}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Recursos tecnológicos inclusivos e acessibilidade}{15}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Tecnologia para a promoção da cidadania}{15}{section.4.3}%
+\setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
+\contentsline {chapter}{\chapternumberline {5}\MakeTextUppercase []{DESENVOLVIMENTO DA SOLUÇÃO WEB}}{16}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Arquitetura da aplicação: HTTP e o \textit {pipeline}}{16}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Roteamento, \textit {binding} e escolha do estilo}{17}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Aplicação web com MVC e Razor}{17}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Persistência com Entity Framework Core}{18}{section.5.4}%
+\contentsline {section}{\numberline {5.5}APIs REST}{21}{section.5.5}%
+\contentsline {section}{\numberline {5.6}Autenticação e autorização}{22}{section.5.6}%
+\contentsline {section}{\numberline {5.7}Segurança e configuração por ambiente}{24}{section.5.7}%
+\contentsline {section}{\numberline {5.8}Estrutura administrativa e integração entre módulos}{24}{section.5.8}%
+\setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
+\contentsline {chapter}{\chapternumberline {6}\MakeTextUppercase []{DESENVOLVIMENTO DA SOLUÇÃO MOBILE}}{25}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Telas principais e fluxo de navegação}{25}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Autenticação e sincronização de dados}{25}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Integração com as APIs}{27}{section.6.3}%
+\setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
+\contentsline {chapter}{\chapternumberline {7}\MakeTextUppercase []{ARQUITETURA DE SOFTWARE}}{28}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Organização em camadas e fronteiras do domínio}{28}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Orientação a objetos e recursos modernos do C\#}{28}{section.7.2}%
+\contentsline {section}{\numberline {7.3}Coleções, LINQ e acesso a dados}{29}{section.7.3}%
+\contentsline {section}{\numberline {7.4}Injeção de dependência e padrões de projeto}{29}{section.7.4}%
+\contentsline {section}{\numberline {7.5}Desempenho e diagnóstico}{30}{section.7.5}%
+\contentsline {section}{\numberline {7.6}Tempo real, cache e versionamento}{30}{section.7.6}%
+\contentsline {section}{\numberline {7.7}Qualidade contínua}{31}{section.7.7}%
+\contentsline {section}{\numberline {7.8}Estratégias de manutenção e evolução}{31}{section.7.8}%
+\setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
+\contentsline {chapter}{\chapternumberline {8}\MakeTextUppercase []{PROJETO DO BANCO DE DADOS}}{32}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Modelo de dados e relacionamentos}{32}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Procedures e triggers}{32}{section.8.2}%
+\contentsline {section}{\numberline {8.3}Estratégias de otimização}{34}{section.8.3}%
+\contentsline {section}{\numberline {8.4}Mecanismos de segurança}{34}{section.8.4}%
+\setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
+\contentsline {chapter}{\chapternumberline {9}\MakeTextUppercase []{INFRAESTRUTURA EM NUVEM E DEVOPS}}{35}{chapter.9}%
+\contentsline {section}{\numberline {9.1}Arquitetura em nuvem e serviços utilizados}{35}{section.9.1}%
+\contentsline {section}{\numberline {9.2}Contêineres e pipeline CI/CD}{35}{section.9.2}%
+\contentsline {section}{\numberline {9.3}Monitoramento, escalabilidade e segurança}{36}{section.9.3}%
+\setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
+\contentsline {chapter}{\chapternumberline {10}\MakeTextUppercase []{GERENCIAMENTO ÁGIL DO PROJETO}}{37}{chapter.10}%
+\contentsline {section}{\numberline {10.1}Product Backlog e Sprint Backlog}{37}{section.10.1}%
+\contentsline {section}{\numberline {10.2}Cronograma das sprints e definição das entregas}{37}{section.10.2}%
+\contentsline {section}{\numberline {10.3}Quadro Kanban e indicadores}{38}{section.10.3}%
+\setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
+\contentsline {chapter}{\chapternumberline {11}\MakeTextUppercase []{RESULTADOS E VALIDAÇÃO}}{39}{chapter.11}%
+\setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
+\contentsline {chapter}{\chapternumberline {12}\MakeTextUppercase []{CONCLUSÃO}}{40}{chapter.12}%
+\vspace {\cftbeforechapterskip }
+\setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
+\contentsline {chapter}{\MakeTextUppercase []{Refer\^encias}}{41}{section*.34}%

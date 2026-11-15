@@ -14,21 +14,14 @@ app/android/local.properties
 .idea/
 
 # LaTeX: arquivos gerados (o 0_main.pdf fica, para leitura do relatório)
-relatorio/*.aux
-relatorio/*.bbl
-relatorio/*.blg
-relatorio/*.listing
-relatorio/*.lof
-relatorio/*.log
-relatorio/*.lot
-relatorio/*.toc
-relatorio/*.out
+./relatorio/
 
 # Editor de notas
 .obsidian/
 
 # Material da UNIP (não é de autoria do projeto)
 Manual_PIM_IV*
+./docs
 
 # Diversos
 __pycache__/
