@@ -20,8 +20,7 @@ Requisitos: .NET 10, Docker e Flutter.
 
 ```bash
 # banco de dados
-docker run -d --name pim-sql -e ACCEPT_EULA=Y -e MSSQL_SA_PASSWORD='Pim@2026forte' \
-  -p 1433:1433 mcr.microsoft.com/mssql/server:2022-latest
+docker-compose up -d
 
 # web (cria o banco e os dados de teste na primeira execução)
 dotnet run --project src/Pim.Web
