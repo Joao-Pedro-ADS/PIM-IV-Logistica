@@ -1,0 +1,14 @@
+services:
+  sql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: pim-sql
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "Pim@2026forte"
+    ports:
+      - "1433:1433"
+    volumes:
+      - pim-sql-data:/var/opt/mssql
+
+volumes:
+  pim-sql-data:
